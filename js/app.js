@@ -6,7 +6,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.speed = Math.random()*80+20;
+    this.speed = Math.random()*50+20;
     
 }
 // Update the enemy's position, required method for game
@@ -17,7 +17,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x=this.x+this.speed*dt;
     if (this.x>505){
-        this.x=0;
+        this.x=-100;
     }
 };
 
@@ -37,21 +37,22 @@ Enemy.prototype.locationspeed = function(){
 // a handleInput() method.
 var Player= function(){
     this.sprite='images/char-princess-girl.png';
-    this.x=220
+    this.x=220;
     this.y=420;
 }
 
 Player.prototype.handleInput=function(direction){
-    if (direction=='left'){
+    if (direction=='left' && this.x>-10 && this.y>0){
         this.x=this.x-20;
     }
-    if (direction=='right'){
+    if (direction=='right' && this.x<430 && this.y>0){
         this.x=this.x+20;
     }
-    if (direction=='up'){
-        this.y=this.y-20
+    if (direction=='up' && this.y>-20){
+        this.y=this.y-20;
     }
-    if (direction=='down'){
+    if (direction=='down' && this.y<440 && this.y>0){
+
         this.y=this.y+20;
     }
 
@@ -60,6 +61,18 @@ Player.prototype.handleInput=function(direction){
 Player.prototype.render=function(){
      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
      ctx.strokeRect(this.x+20, this.y+55, 60, 80);
+     if (this.y < 0){
+        ctx.font="30pt Impact";
+        ctx.textAlign="center";
+        ctx.fillStyle='white'
+        ctx.fillText("You Win!", 250, 315);
+        
+        ctx.strokeStyle='black'; 
+        ctx.lineWidth=3;       
+        ctx.strokeText("You Win!", 250, 315);
+        
+
+    }
 }
 
 Player.prototype.update=function(){
@@ -67,11 +80,12 @@ Player.prototype.update=function(){
     console.log(allEnemies.length);
     ycoord=this.y+55
     for (i=0; i<allEnemies.length; i++){
-        if (xcoord+60>allEnemies[i].x && xcoord<allEnemies[i].x+100 && ycoord<allEnemies[i].y+140 && ycoord+80>allEnemies[i].y+80){
+        if (xcoord+60>allEnemies[i].x && xcoord<allEnemies[i].x+100 && ycoord<allEnemies[i].y+110 && ycoord+80>allEnemies[i].y+80){
           this.x=200;
-          this.y=0;
+          this.y=420;
         }
     }
+    
 }
 
 // Now instantiate your objects.
