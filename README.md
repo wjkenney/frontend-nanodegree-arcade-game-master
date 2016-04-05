@@ -1,6 +1,20 @@
-frontend-nanodegree-arcade-game
-===============================
+#frontend-nanodegre-arcade-game#
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+Please have fun playing this classic arcade frogger game
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+#Install#
+
+**Download/zip** this git repository and open in your browser.
+
+#Contribution# 
+Please feel free to make changes!
+
+#lisense#
+
+This work is licensed under a Creative Commons Attribution 3.0 License.
+This means you can use the dump as long as you give credit to geonames (a link on your website to www.geonames.org is ok)
+see http://creativecommons.org/licenses/by/3.0/
+UK: Contains Royal Mail data Royal Mail copyright and database right 2010.
+The Data is provided "as is" without warranty or any representation of accuracy, timeliness or completeness.
+
+
