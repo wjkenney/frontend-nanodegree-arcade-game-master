@@ -1,3 +1,11 @@
+var Character=function(){
+
+};
+
+Character.prototype.render=function() {
+    "use strict";
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
 // Enemies our player must avoid
 var Enemy = function() {
         // Variables applied to each of our instances go here,
@@ -8,8 +16,10 @@ var Enemy = function() {
         "use strict";
         this.sprite = 'images/enemy-bug.png';
         this.speed = Math.random() * 50 + 20;
+        Character.call(this);
 
     };
+Enemy.prototype=Object.create(Character.prototype);
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -23,12 +33,6 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    "use strict";
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ctx.strokeRect(this.x, this.y + 80, 100, 60);
-};
 
 //choosing a speed by random and binding it to each of the enemy.
 Enemy.prototype.locationspeed = function() {
@@ -40,12 +44,16 @@ Enemy.prototype.locationspeed = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
 var Player = function() {
+    Character.call(this)
     'use strict';
     this.sprite = 'images/char-princess-girl.png';
     this.x = 220;
     this.y = 420;
 };
+
+Player.prototype=Object.create(Character.prototype);
 
 //getting the input, checking to see if player is near a wall and moving him in the right direction
 Player.prototype.handleInput = function(direction) {
@@ -62,35 +70,19 @@ Player.prototype.handleInput = function(direction) {
     if (direction == 'down' && this.y < 440 && this.y > 0) {
 
         this.y = this.y + 20;
-    }
+    }    
 
 };
 
 //putting player onto the canvas, if the player has won, creating a victory message
-Player.prototype.render = function() {
-    "use strict";
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ctx.strokeRect(this.x + 20, this.y + 55, 60, 80);
-    if (this.y < 0) {
-        ctx.font = "30pt Impact";
-        ctx.textAlign = "center";
-        ctx.fillStyle = 'white';
-        ctx.fillText("You Win!", 250, 315);
-
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 3;
-        ctx.strokeText("You Win!", 250, 315);
-
-    }
-};
 
 //we are updating the new position of the player.  Since the image size is greater than the actual character (ie there is
 //a lot of margin space around the character) we have to subtract 20 and 55 to find the true edge of the character.
 // Next we check to see if left edge, right edge upper edge or lower edge is touching a bug.
 Player.prototype.update = function() {
     "use strict";
-    xcoord = this.x + 20;
-    ycoord = this.y + 55;
+    var xcoord = this.x + 20;
+    var ycoord = this.y + 55;
     for (i = 0; i < allEnemies.length; i+=1) {
         if (xcoord + 60 > allEnemies[i].x && xcoord < allEnemies[i].x + 100 && ycoord < allEnemies[i].y + 110 && ycoord + 80 > allEnemies[i].y + 80) {
             this.x = 200;
@@ -99,6 +91,19 @@ Player.prototype.update = function() {
     }
 
 };
+
+Player.prototype.end=function(){
+    "use strict"
+    if (this.y < 10) {
+        ctx.font = "30pt Impact";
+        ctx.textAlign = "center";
+        ctx.fillStyle = 'white';
+        ctx.fillText("You Win!", 250, 315);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 3;
+        ctx.strokeText("You Win!", 250, 315);
+    }
+}
 
 // Now instantiate your objects.
 
