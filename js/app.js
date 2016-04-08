@@ -5,7 +5,7 @@ var Character=function(){
 Character.prototype.render=function() {
     "use strict";
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 // Enemies our player must avoid
 var Enemy = function() {
         // Variables applied to each of our instances go here,
@@ -20,6 +20,7 @@ var Enemy = function() {
 
     };
 Enemy.prototype=Object.create(Character.prototype);
+Enemy.prototype.constructor = Enemy;
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -46,7 +47,7 @@ Enemy.prototype.locationspeed = function() {
 // a handleInput() method.
 
 var Player = function() {
-    Character.call(this)
+    Character.call(this);
     'use strict';
     this.sprite = 'images/char-princess-girl.png';
     this.x = 220;
@@ -54,6 +55,7 @@ var Player = function() {
 };
 
 Player.prototype=Object.create(Character.prototype);
+Player.prototype.constructor = Player;
 
 //getting the input, checking to see if player is near a wall and moving him in the right direction
 Player.prototype.handleInput = function(direction) {
@@ -61,13 +63,13 @@ Player.prototype.handleInput = function(direction) {
     if (direction == 'left' && this.x > -10 && this.y > 0) {
         this.x = this.x - 20;
     }
-    if (direction == 'right' && this.x < 430 && this.y > 0) {
+    if (direction == 'right' && this.x < 420 && this.y > 0) {
         this.x = this.x + 20;
     }
     if (direction == 'up' && this.y > -20) {
         this.y = this.y - 20;
     }
-    if (direction == 'down' && this.y < 440 && this.y > 0) {
+    if (direction == 'down' && this.y < 420 && this.y > 0) {
 
         this.y = this.y + 20;
     }    
@@ -93,7 +95,7 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.end=function(){
-    "use strict"
+    "use strict";
     if (this.y < 10) {
         ctx.font = "30pt Impact";
         ctx.textAlign = "center";
@@ -103,7 +105,7 @@ Player.prototype.end=function(){
         ctx.lineWidth = 3;
         ctx.strokeText("You Win!", 250, 315);
     }
-}
+};
 
 // Now instantiate your objects.
 
