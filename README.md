@@ -1,6 +1,6 @@
 # frontend-nanodegre-arcade-game
 
-Please have fun helping the princess make her way to the river!  You can move the princess by pressing the up, down right and left keys on your keypad, but beware of the bugs! Click [here](http://wjkenney.github.io/frontend-nanodegree-arcade-game-master/) if you want to play 
+Please have fun helping the princess make her way to the river!  You can move the princess by pressing the up, down right and left keys on your keypad, but beware of the bugs! Click [here](http://wjkenney.github.io/frontend-nanodegree-arcade-game-master/) if you want to play! 
 
 # Contribution
 Please feel free to make changes!
